@@ -1,0 +1,104 @@
+{
+    "version": "0",
+    "id": "9846c47d-393e-f839-d35f-c7a8a34601b2",
+    "detail-type": "ECS Task State Change",
+    "source": "aws.ecs",
+    "account": "591990815822",
+    "time": "2025-03-19T08:36:58Z",
+    "region": "eu-central-1",
+    "resources": [
+        "arn:aws:ecs:eu-central-1:591990815822:task/nadiki-prod-registrar/c868bf8416fb432098bb62d78f1a7941"
+    ],
+    "detail": {
+        "attachments": [
+            {
+                "id": "27c8f08c-df3e-4809-8a39-5ead1b005b09",
+                "type": "sdi",
+                "status": "ATTACHED",
+                "details": []
+            },
+            {
+                "id": "321190d3-6de6-4de6-8859-2492254332ac",
+                "type": "eni",
+                "status": "ATTACHED",
+                "details": [
+                    {
+                        "name": "subnetId",
+                        "value": "subnet-03e94a33dd4aa7037"
+                    },
+                    {
+                        "name": "networkInterfaceId",
+                        "value": "eni-0c4bcbc737f98fcc2"
+                    },
+                    {
+                        "name": "macAddress",
+                        "value": "06:83:b5:61:4e:13"
+                    },
+                    {
+                        "name": "privateDnsName",
+                        "value": "ip-10-14-12-156.eu-central-1.compute.internal"
+                    },
+                    {
+                        "name": "privateIPv4Address",
+                        "value": "10.14.12.156"
+                    }
+                ]
+            }
+        ],
+        "attributes": [
+            {
+                "name": "ecs.cpu-architecture",
+                "value": "x86_64"
+            }
+        ],
+        "availabilityZone": "eu-central-1b",
+        "clusterArn": "arn:aws:ecs:eu-central-1:591990815822:cluster/nadiki-prod-registrar",
+        "connectivity": "CONNECTED",
+        "connectivityAt": "2025-03-19T08:36:11.01Z",
+        "containers": [
+            {
+                "containerArn": "arn:aws:ecs:eu-central-1:591990815822:container/nadiki-prod-registrar/c868bf8416fb432098bb62d78f1a7941/e8a7e66b-fca8-4867-b0e3-846ab01bb9be",
+                "lastStatus": "RUNNING",
+                "name": "registrar",
+                "image": "591990815822.dkr.ecr.eu-central-1.amazonaws.com/nadiki/registrar:latest",
+                "imageDigest": "sha256:3c32a17caf88422c3878b2567b517587fd3f564be60c582a2e816a681502b1ef",
+                "runtimeId": "c868bf8416fb432098bb62d78f1a7941-3827131484",
+                "taskArn": "arn:aws:ecs:eu-central-1:591990815822:task/nadiki-prod-registrar/c868bf8416fb432098bb62d78f1a7941",
+                "networkInterfaces": [
+                    {
+                        "attachmentId": "321190d3-6de6-4de6-8859-2492254332ac",
+                        "privateIpv4Address": "10.14.12.156"
+                    }
+                ],
+                "cpu": "0"
+            }
+        ],
+        "cpu": "256",
+        "createdAt": "2025-03-19T08:36:07.178Z",
+        "desiredStatus": "RUNNING",
+        "enableExecuteCommand": false,
+        "ephemeralStorage": {
+            "sizeInGiB": 20
+        },
+        "group": "service:nadiki-prod-registrar",
+        "launchType": "FARGATE",
+        "lastStatus": "RUNNING",
+        "memory": "512",
+        "overrides": {
+            "containerOverrides": [
+                {
+                    "name": "registrar"
+                }
+            ]
+        },
+        "platformVersion": "1.4.0",
+        "pullStartedAt": "2025-03-19T08:36:18.084Z",
+        "pullStoppedAt": "2025-03-19T08:36:36.782Z",
+        "startedAt": "2025-03-19T08:36:58.564Z",
+        "startedBy": "ecs-svc/5306435414052140731",
+        "taskArn": "arn:aws:ecs:eu-central-1:591990815822:task/nadiki-prod-registrar/c868bf8416fb432098bb62d78f1a7941",
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:591990815822:task-definition/nadiki-registrar:1",
+        "updatedAt": "2025-03-19T08:36:58.564Z",
+        "version": 5
+    }
+}
