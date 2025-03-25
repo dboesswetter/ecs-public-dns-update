@@ -1,20 +1,14 @@
-variable "ecs_cluster_name" {
-  type = string
+variable "service_name_mappings" {
+  type = list(object({
+    ecs_cluster_name = string,
+    ecs_service_name = string,
+    hosted_zone_id   = string,
+    dns_name         = string,
+    dns_ttl          = number
+  }))
 }
 
-variable "ecs_service_name" {
-  type = string
-}
-
-variable "hosted_zone_id" {
-  type = string
-}
-
-variable "dns_name" {
-  type = string
-}
-
-variable "dns_ttl" {
-  type    = number
-  default = 300
+variable "lambda_name" {
+  type    = string
+  default = "ecs-dns-update"
 }

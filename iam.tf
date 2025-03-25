@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "assume_role_lambda" {
   statement {
     effect = "Allow"
 
@@ -11,13 +11,13 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
-resource "aws_iam_role" "default" {
-  name               = "${local.name}-lambda-execution"
-  description        = "Lambda execution role for ${local.function_name}"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+resource "aws_iam_role" "lambda" {
+  name               = "${var.lambda_name}-lambda-execution"
+  description        = "Lambda execution role for ${var.lambda_name}"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_lambda.json
 }
 
-data "aws_iam_policy_document" "default" {
+data "aws_iam_policy_document" "lambda" {
   statement {
     effect = "Allow"
 
@@ -58,13 +58,10 @@ data "aws_iam_policy_document" "default" {
   }
 }
 
-resource "aws_iam_role_policy" "default" {
-  role   = aws_iam_role.default.name
-  policy = data.aws_iam_policy_document.default.json
+resource "aws_iam_role_policy" "lambda" {
+  role   = aws_iam_role.lambda.name
+  policy = data.aws_iam_policy_document.lambda.json
 }
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "assume_role_eventbridge" {
   statement {
@@ -80,7 +77,7 @@ data "aws_iam_policy_document" "assume_role_eventbridge" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${local.rule_name}"]
+      values   = [for x in local.rule_names : "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${x}"]
     }
 
     condition {
@@ -92,8 +89,8 @@ data "aws_iam_policy_document" "assume_role_eventbridge" {
 }
 
 resource "aws_iam_role" "eventbridge" {
-  name               = "${local.name}-eventbridge-rule"
-  description        = "Role for Eventibridge to call Lambda ${local.function_name}"
+  name               = "${var.lambda_name}-eventbridge-rule"
+  description        = "Role for Eventibridge to call Lambda ${var.lambda_name}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_eventbridge.json
 }
 
